@@ -68,14 +68,16 @@
 - [ ] Unit tests
 - [ ] Document
 
-...
 
-## E2E tests
+--------- FrontEnd ----------
+
+
+## E2E or Integration tests
 
 - [ ] Search
 - [ ] People and Film Details
 
 ## Finalize
 
-- [ ] Update README.md
+- [ ] Update README.md and (TODO.md "this")
 - [ ] Add NEXT_STEPS.md
