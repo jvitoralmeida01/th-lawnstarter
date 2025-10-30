@@ -1,0 +1,98 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: ./services/web
+      dockerfile: Dockerfile
+    container_name: web
+    ports: ["5173:5173"]
+    environment:
+      VITE_API_BASE_URL: "http://localhost:8080"
+    depends_on:
+      - bff
+    networks:
+      - sw-net
+    volumes:
+      - ./services/web:/app
+
+  bff:
+    build:
+      context: ./services/bff
+      dockerfile: Dockerfile
+    container_name: bff
+    env_file: [./env/bff.env]
+    ports: ["8080:8080"]
+    depends_on:
+      - starwars
+      - statistics
+      - rabbitmq
+      - redis
+    networks:
+      - sw-net
+    volumes:
+      - ./services/bff:/app
+
+  starwars:
+    build:
+      context: ./services/starwars-service
+      dockerfile: Dockerfile
+    container_name: starwars-service
+    env_file: [./env/starwars-service.env]
+    ports: ["8081:8081"]
+    depends_on:
+      - rabbitmq
+      - redis
+    networks:
+      - sw-net
+    volumes:
+      - ./services/starwars-service:/app
+
+  statistics:
+    build:
+      context: ./services/statistics-service
+      dockerfile: Dockerfile
+    container_name: statistics-service
+    env_file: [./env/statistics-service.env]
+    ports: ["8082:8082"]
+    depends_on:
+      - db
+      - rabbitmq
+    networks:
+      - sw-net
+    volumes:
+      - ./services/statistics-service:/app
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672" # Management UI
+    networks:
+      - sw-net
+
+  db:
+    image: postgres:16
+    container_name: postgres
+    env_file: [./env/db.env]
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - sw-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - sw-net
+
+networks:
+  sw-net:
+
+volumes:
+  pgdata:

@@ -80,4 +80,4 @@
 ## Finalize
 
 - [ ] Update README.md and (TODO.md "this")
-- [ ] Add NEXT_STEPS.md
+- [ ] Add IMPROVEMENTS.md
