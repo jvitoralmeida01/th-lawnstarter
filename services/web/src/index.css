@@ -1,70 +1,104 @@
 @import "tailwindcss";
 
+@layer base {
+  * {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+}
+
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
+@theme {
+  --font-montserrat: "Montserrat", "sans-serif";
+  --font-orbitron: "Orbitron", "sans-serif";
+  /* --- Colors ---- */
+  /* primary */
+  --color-primary-300: #0ab463;
+  --color-primary-500: #089954;
+  /* accent */
+  --color-accent: #0094ff;
+  --color-accent-hover: #0077cc;
+  /* neutral */
+  --color-neutral-*: initial;
+  --color-neutral-100: #ffffff;
+  --color-neutral-200: #ededed;
+  --color-neutral-300: #dadada;
+  --color-neutral-400: #c4c4c4;
+  --color-neutral-500: #383838;
+  /* text */
+  --color-typography-100: #ffffff;
+  --color-typography-200: #c4c4c4;
+  --color-typography-300: #383838;
+  --color-typography-400: #000000;
+  /* text-selection */
+  --color-selection: #daeee4;
+  /* shadow */
+  --color-shadow-75: #848484bf;
+  /* background */
+  --color-background: #ededed;
+  /* metallic */
+  --color-metallic-gold-from: #e6c540;
+  --color-metallic-gold-via: #daa520;
+  --color-metallic-gold-to: #d4a015;
+  --color-metallic-gold-bg: #b8860b33;
+  --color-metallic-silver-from: #949494;
+  --color-metallic-silver-via: #808080;
+  --color-metallic-silver-to: #757575;
+  --color-metallic-silver-bg: #69696933;
+  --color-metallic-bronze-from: #c0852d;
+  --color-metallic-bronze-via: #b87333;
+  --color-metallic-bronze-to: #b56b2f;
+  --color-metallic-bronze-bg: #a0522d33;
+  /* --- Spacing ---- */
+  --spacing-xxs: 0.25rem;
+  --spacing-xs: 0.5rem;
+  --spacing-s: 1rem;
+  --spacing-m: 1.5rem;
+  --spacing-l: 2rem;
+  /* --- Sizes ---- */
+  --height-xxs: 5vh;
+  --height-lg: 80vh;
+  --height-xl: 88vh;
+  /* --- Typography ---- */
+  --text-title: 1.25rem;
+  --text-subtitle: 1rem;
+  --text-content: 0.75rem;
+  --text-action: 0.65rem;
+}
+
+.theme-starwars {
+  /* --- Colors ---- */
+  /* primary */
+  --color-primary-300: #ffe81f;
+  --color-primary-500: #e1cb1a;
+  /* accent */
+  --color-accent: #ffff94;
+  --color-accent-hover: #dddd44;
+  /* neutral */
+  --color-neutral-100: #242424;
+  --color-neutral-200: #343434;
+  --color-neutral-300: #787878;
+  --color-neutral-400: #b6b6b6;
+  --color-neutral-500: #ededed;
+  /* text */
+  --color-typography-100: #000000;
+  --color-typography-200: #383838;
+  --color-typography-300: #c4c4c4;
+  --color-typography-400: #ffffff;
+  /* selection */
+  --color-selection: #646434;
+  /* shadow */
+  --color-shadow-75: #0000;
+  /* background */
+  --color-background: #000000;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  background-color: var(--color-background);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

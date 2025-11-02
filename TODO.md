@@ -9,10 +9,9 @@
 
 ## [ ] Project Config
 
-- [ ] Setup FrontEnd
+- [x] Setup FrontEnd
 - [ ] Setup BackEnd services
 - [ ] Setup DB
-- [ ] Setup README.md
 
 --------- FrontEnd ----------
 

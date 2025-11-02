@@ -16,13 +16,24 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Decorators */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@di/*": ["./src/infrastructure/di/*"],
+      "@ports/*": ["./src/application/ports/*"],
+      "@http/*": ["./src/infrastructure/http/*"]
+    }
   },
   "include": ["src"]
 }
