@@ -1,12 +1,12 @@
 export type SearchResultEntity = {
   id: string;
   name: string;
-  type: SearchResultEntityType;
+  entityType: SearchResultEntityType;
 };
 
 export const SearchResultEntityType = {
-  Person: "person",
-  Film: "film",
+  People: "people",
+  Films: "films",
 };
 
 export type SearchResultEntityType =

@@ -8,9 +8,9 @@ interface RadioSelectorProps {
 
 function RadioSelector({ selectedTypes, onToggle }: RadioSelectorProps) {
   const isPersonSelected = selectedTypes.includes(
-    SearchResultEntityType.Person
+    SearchResultEntityType.People
   );
-  const isFilmSelected = selectedTypes.includes(SearchResultEntityType.Film);
+  const isFilmSelected = selectedTypes.includes(SearchResultEntityType.Films);
 
   return (
     <div className="flex flex-col gap-xs">
@@ -18,9 +18,9 @@ function RadioSelector({ selectedTypes, onToggle }: RadioSelectorProps) {
         <input
           type="checkbox"
           name="searchType"
-          value={SearchResultEntityType.Person}
+          value={SearchResultEntityType.People}
           checked={isPersonSelected}
-          onChange={() => onToggle(SearchResultEntityType.Person)}
+          onChange={() => onToggle(SearchResultEntityType.People)}
           className="w-3 h-3 appearance-none outline-2 outline-offset-2 outline-neutral-300 rounded-full focus:ring-2 focus:ring-primary-300 focus:ring-offset-0 cursor-pointer checked:bg-primary-300 checked:outline-primary-500"
         />
         <FaUserAstronaut className="text-neutral-300" />
@@ -32,9 +32,9 @@ function RadioSelector({ selectedTypes, onToggle }: RadioSelectorProps) {
         <input
           type="checkbox"
           name="searchType"
-          value={SearchResultEntityType.Film}
+          value={SearchResultEntityType.Films}
           checked={isFilmSelected}
-          onChange={() => onToggle(SearchResultEntityType.Film)}
+          onChange={() => onToggle(SearchResultEntityType.Films)}
           className="w-3 h-3 appearance-none outline-2 outline-offset-2 outline-neutral-300 rounded-full focus:ring-2 focus:ring-primary-300 focus:ring-offset-0 cursor-pointer checked:bg-primary-300 checked:outline-primary-500"
         />
         <FaFilm className="text-neutral-300" />

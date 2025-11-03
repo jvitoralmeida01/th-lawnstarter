@@ -36,7 +36,7 @@ export class MockSearchRepository implements SearchRepository {
     const results: SearchResultEntity[] = [];
     const lowerSearchTerm = searchTerm.toLowerCase();
 
-    if (entityTypes.includes(SearchResultEntityType.Person)) {
+    if (entityTypes.includes(SearchResultEntityType.People)) {
       const matchingPeople = this.mockPeople.filter((person) =>
         person.name.toLowerCase().includes(lowerSearchTerm)
       );
@@ -44,12 +44,12 @@ export class MockSearchRepository implements SearchRepository {
         ...matchingPeople.map((person) => ({
           id: person.id,
           name: person.name,
-          type: SearchResultEntityType.Person as SearchResultEntityType,
+          type: SearchResultEntityType.People as SearchResultEntityType,
         }))
       );
     }
 
-    if (entityTypes.includes(SearchResultEntityType.Film)) {
+    if (entityTypes.includes(SearchResultEntityType.Films)) {
       const matchingFilms = this.mockFilms.filter((film) =>
         film.name.toLowerCase().includes(lowerSearchTerm)
       );
@@ -57,7 +57,7 @@ export class MockSearchRepository implements SearchRepository {
         ...matchingFilms.map((film) => ({
           id: film.id,
           name: film.name,
-          type: SearchResultEntityType.Film as SearchResultEntityType,
+          type: SearchResultEntityType.Films as SearchResultEntityType,
         }))
       );
     }

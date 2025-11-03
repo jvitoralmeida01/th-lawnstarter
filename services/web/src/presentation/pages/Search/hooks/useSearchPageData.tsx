@@ -29,7 +29,7 @@ function useSearchPageData(): SearchPageData {
     searchPlaceholders[1]
   );
   const [selectedTypes, setSelectedTypes] = useState<SearchResultEntityType[]>([
-    SearchResultEntityType.Person,
+    SearchResultEntityType.People,
   ]);
   const [results, setResults] = useState<SearchResultEntity[]>([]);
   const [loading, setLoading] = useState(false);
@@ -76,8 +76,8 @@ function useSearchPageData(): SearchPageData {
   };
 
   useEffect(() => {
-    const hasPersonType = selectedTypes.includes(SearchResultEntityType.Person);
-    const hasFilmType = selectedTypes.includes(SearchResultEntityType.Film);
+    const hasPersonType = selectedTypes.includes(SearchResultEntityType.People);
+    const hasFilmType = selectedTypes.includes(SearchResultEntityType.Films);
 
     if (hasPersonType && hasFilmType) {
       setSearchPlaceholder(searchPlaceholders[0]);

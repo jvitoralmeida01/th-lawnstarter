@@ -2,14 +2,14 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 
 // Repositories
-// import { HttpPeopleRepository } from "../http/HttpPeopleRepository";
-import { MockPeopleRepository } from "../mock/MockPeopleRepository";
-// import { HttpFilmsRepository } from "../http/HttpFilmsRepository";
-import { MockFilmRepository } from "../mock/MockFilmRepository";
-// import { HttpSearchRepository } from "../http/HttpSearchRepository";
-import { MockSearchRepository } from "../mock/MockSearchRepository";
-// import { HttpStatisticsRepository } from "../http/HttpStatisticsRepository";
-import { MockStatisticsRepository } from "../mock/MockStatisticsRepository";
+import { HttpPeopleRepository } from "../http/HttpPeopleRepository";
+// import { MockPeopleRepository } from "../mock/MockPeopleRepository";
+import { HttpFilmsRepository } from "../http/HttpFilmsRepository";
+// import { MockFilmRepository } from "../mock/MockFilmRepository";
+import { HttpSearchRepository } from "../http/HttpSearchRepository";
+// import { MockSearchRepository } from "../mock/MockSearchRepository";
+import { HttpStatisticsRepository } from "../http/HttpStatisticsRepository";
+// import { MockStatisticsRepository } from "../mock/MockStatisticsRepository";
 
 // Repository Interfaces
 import type PeopleRepository from "../../application/ports/PeopleRepository";
@@ -25,19 +25,19 @@ import { GetStatisticsUseCase } from "../../application/use-cases/statistics/Get
 
 // Register repositories with tokens
 container.register<PeopleRepository>("PeopleRepository", {
-  useClass: MockPeopleRepository,
+  useClass: HttpPeopleRepository,
 });
 
 container.register<FilmsRepository>("FilmsRepository", {
-  useClass: MockFilmRepository,
+  useClass: HttpFilmsRepository,
 });
 
 container.register<SearchRepository>("SearchRepository", {
-  useClass: MockSearchRepository,
+  useClass: HttpSearchRepository,
 });
 
 container.register<StatisticsRepository>("StatisticsRepository", {
-  useClass: MockStatisticsRepository,
+  useClass: HttpStatisticsRepository,
 });
 
 // Register use cases
