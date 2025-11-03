@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'starwars' => [
+        'base_url' => env('STARWARS_BASE', 'http://localhost:8081'),
+    ],
+
+    'statistics' => [
+        'base_url' => env('STATISTICS_BASE', 'http://localhost:8082'),
+    ],
+
 ];
