@@ -27,12 +27,12 @@ describe("HttpSearchRepository", () => {
       {
         id: "1",
         name: "Luke Skywalker",
-        type: SearchResultEntityType.Person,
+        entityType: SearchResultEntityType.People,
       },
       {
         id: "2",
         name: "A New Hope",
-        type: SearchResultEntityType.Film,
+        entityType: SearchResultEntityType.Films,
       },
     ];
 
@@ -47,8 +47,8 @@ describe("HttpSearchRepository", () => {
     vi.mocked(BffAxiosClient.get).mockResolvedValue(mockResponse);
 
     const result = await repository.getMany("luke", [
-      SearchResultEntityType.Person,
-      SearchResultEntityType.Film,
+      SearchResultEntityType.People,
+      SearchResultEntityType.Films,
     ]);
 
     expect(BffAxiosClient.get).toHaveBeenCalledWith(
@@ -56,8 +56,8 @@ describe("HttpSearchRepository", () => {
       {
         params: {
           entityTypes: [
-            SearchResultEntityType.Person,
-            SearchResultEntityType.Film,
+            SearchResultEntityType.People,
+            SearchResultEntityType.Films,
           ],
         },
       }
@@ -78,13 +78,13 @@ describe("HttpSearchRepository", () => {
     vi.mocked(BffAxiosClient.get).mockResolvedValue(mockResponse);
 
     await expect(
-      repository.getMany("test", [SearchResultEntityType.Person])
+      repository.getMany("test", [SearchResultEntityType.People])
     ).rejects.toThrow("Internal server error");
     expect(BffAxiosClient.get).toHaveBeenCalledWith(
       `${BffEndpoints.Search}/test`,
       {
         params: {
-          entityTypes: [SearchResultEntityType.Person],
+          entityTypes: [SearchResultEntityType.People],
         },
       }
     );
@@ -102,7 +102,7 @@ describe("HttpSearchRepository", () => {
     vi.mocked(BffAxiosClient.get).mockResolvedValue(mockResponse);
 
     await expect(
-      repository.getMany("test", [SearchResultEntityType.Film])
+      repository.getMany("test", [SearchResultEntityType.Films])
     ).rejects.toThrow("Failed to search");
   });
 });

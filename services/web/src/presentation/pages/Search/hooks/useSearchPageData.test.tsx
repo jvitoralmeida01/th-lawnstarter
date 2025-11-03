@@ -30,7 +30,7 @@ describe("useSearchPageData", () => {
       "e.g. Chewbacca, Yoda, Boba Fett"
     );
     expect(result.current.selectedTypes).toEqual([
-      SearchResultEntityType.Person,
+      SearchResultEntityType.People,
     ]);
     expect(result.current.results).toEqual([]);
     expect(result.current.loading).toBe(false);
@@ -45,12 +45,12 @@ describe("useSearchPageData", () => {
 
     // Add Film
     act(() => {
-      result.current.handleToggleType(SearchResultEntityType.Film);
+      result.current.handleToggleType(SearchResultEntityType.Films);
     });
 
     await waitFor(() => {
       expect(result.current.selectedTypes).toContain(
-        SearchResultEntityType.Film
+        SearchResultEntityType.Films
       );
     });
 
@@ -60,12 +60,12 @@ describe("useSearchPageData", () => {
 
     // Remove Person, leaving only Film
     act(() => {
-      result.current.handleToggleType(SearchResultEntityType.Person);
+      result.current.handleToggleType(SearchResultEntityType.People);
     });
 
     await waitFor(() => {
       expect(result.current.selectedTypes).not.toContain(
-        SearchResultEntityType.Person
+        SearchResultEntityType.People
       );
     });
 
@@ -79,12 +79,12 @@ describe("useSearchPageData", () => {
       {
         id: "1",
         name: "Luke Skywalker",
-        type: SearchResultEntityType.Person,
+        type: SearchResultEntityType.People,
       },
       {
         id: "2",
         name: "A New Hope",
-        type: SearchResultEntityType.Film,
+        type: SearchResultEntityType.Films,
       },
     ];
 
@@ -106,7 +106,7 @@ describe("useSearchPageData", () => {
 
     expect(result.current.results).toEqual(mockResults);
     expect(mockExecute).toHaveBeenCalledWith("luke", [
-      SearchResultEntityType.Person,
+      SearchResultEntityType.People,
     ]);
   });
 
@@ -145,40 +145,46 @@ describe("useSearchPageData", () => {
 
     // Initially has Person selected
     expect(result.current.selectedTypes).toEqual([
-      SearchResultEntityType.Person,
+      SearchResultEntityType.People,
     ]);
 
     // Add Film
     act(() => {
-      result.current.handleToggleType(SearchResultEntityType.Film);
+      result.current.handleToggleType(SearchResultEntityType.Films);
     });
 
     expect(result.current.selectedTypes).toHaveLength(2);
     expect(result.current.selectedTypes).toContain(
-      SearchResultEntityType.Person
+      SearchResultEntityType.People
     );
-    expect(result.current.selectedTypes).toContain(SearchResultEntityType.Film);
+    expect(result.current.selectedTypes).toContain(
+      SearchResultEntityType.Films
+    );
 
     // Remove Person
     act(() => {
-      result.current.handleToggleType(SearchResultEntityType.Person);
+      result.current.handleToggleType(SearchResultEntityType.People);
     });
 
     // Should still have Film, but not Person
     expect(result.current.selectedTypes).toHaveLength(1);
-    expect(result.current.selectedTypes).toContain(SearchResultEntityType.Film);
+    expect(result.current.selectedTypes).toContain(
+      SearchResultEntityType.Films
+    );
     expect(result.current.selectedTypes).not.toContain(
-      SearchResultEntityType.Person
+      SearchResultEntityType.People
     );
 
     // Try to remove Film
     act(() => {
-      result.current.handleToggleType(SearchResultEntityType.Film);
+      result.current.handleToggleType(SearchResultEntityType.Films);
     });
 
     // Should still have Film (cannot have 0 selected)
     expect(result.current.selectedTypes).toHaveLength(1);
-    expect(result.current.selectedTypes).toContain(SearchResultEntityType.Film);
+    expect(result.current.selectedTypes).toContain(
+      SearchResultEntityType.Films
+    );
   });
 
   it("should not search when searchTerm is empty", async () => {

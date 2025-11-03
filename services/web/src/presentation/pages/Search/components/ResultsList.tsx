@@ -13,9 +13,9 @@ function ResultsList({ results }: ResultsListProps) {
   const navigate = useNavigate();
 
   const handleSeeDetails = (result: SearchResultEntity) => {
-    if (result.type === SearchResultEntityType.Person) {
+    if (result.entityType === SearchResultEntityType.People) {
       navigate(`/people/${result.id}`);
-    } else if (result.type === SearchResultEntityType.Film) {
+    } else if (result.entityType === SearchResultEntityType.Films) {
       navigate(`/film/${result.id}`);
     }
   };
@@ -42,11 +42,11 @@ function ResultsList({ results }: ResultsListProps) {
     <div className="flex flex-col">
       {results.map((result) => (
         <div
-          key={`${result.type}-${result.id}`}
+          key={`${result.entityType}-${result.id}`}
           className="flex items-center justify-between border-b border-neutral-300 py-xs"
         >
           <div className="flex items-center gap-xs">
-            {result.type === SearchResultEntityType.Person ? (
+            {result.entityType === SearchResultEntityType.People ? (
               <FaUserAstronaut className="text-neutral-300" />
             ) : (
               <FaFilm className="text-neutral-300" />

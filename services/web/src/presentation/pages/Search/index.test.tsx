@@ -16,7 +16,7 @@ describe("SearchPage", () => {
     searchTerm: "",
     setSearchTerm: vi.fn(),
     searchPlaceholder: "e.g. Chewbacca, Yoda, Boba Fett",
-    selectedTypes: [SearchResultEntityType.Person],
+    selectedTypes: [SearchResultEntityType.People],
     handleToggleType: vi.fn(),
     results: [],
     loading: false,
@@ -68,8 +68,8 @@ describe("SearchPage", () => {
     mockUseSearchPageData.mockReturnValue({
       ...defaultMockData,
       selectedTypes: [
-        SearchResultEntityType.Person,
-        SearchResultEntityType.Film,
+        SearchResultEntityType.People,
+        SearchResultEntityType.Films,
       ],
       handleToggleType: mockHandleToggleType,
     });
@@ -88,7 +88,7 @@ describe("SearchPage", () => {
 
     await user.click(filmsCheckbox);
     expect(mockHandleToggleType).toHaveBeenCalledWith(
-      SearchResultEntityType.Film
+      SearchResultEntityType.Films
     );
   });
 
@@ -96,7 +96,7 @@ describe("SearchPage", () => {
     // Test People only
     mockUseSearchPageData.mockReturnValue({
       ...defaultMockData,
-      selectedTypes: [SearchResultEntityType.Person],
+      selectedTypes: [SearchResultEntityType.People],
       searchPlaceholder: "e.g. Chewbacca, Yoda, Boba Fett",
     });
 
@@ -113,7 +113,7 @@ describe("SearchPage", () => {
     // Test Films only
     mockUseSearchPageData.mockReturnValue({
       ...defaultMockData,
-      selectedTypes: [SearchResultEntityType.Film],
+      selectedTypes: [SearchResultEntityType.Films],
       searchPlaceholder: "e.g. The Empire Strikes Back, The Force Awakens",
     });
 
@@ -133,8 +133,8 @@ describe("SearchPage", () => {
     mockUseSearchPageData.mockReturnValue({
       ...defaultMockData,
       selectedTypes: [
-        SearchResultEntityType.Person,
-        SearchResultEntityType.Film,
+        SearchResultEntityType.People,
+        SearchResultEntityType.Films,
       ],
       searchPlaceholder:
         "e.g. Darth Vader, A New Hope, Luke Skywalker, Return of the Jedi",
@@ -158,12 +158,12 @@ describe("SearchPage", () => {
       {
         id: "1",
         name: "Luke Skywalker",
-        type: SearchResultEntityType.Person,
+        type: SearchResultEntityType.People,
       },
       {
         id: "2",
         name: "A New Hope",
-        type: SearchResultEntityType.Film,
+        type: SearchResultEntityType.Films,
       },
     ];
 
