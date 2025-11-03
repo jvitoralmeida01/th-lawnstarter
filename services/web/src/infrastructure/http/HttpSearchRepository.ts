@@ -17,8 +17,9 @@ export class HttpSearchRepository implements SearchRepository {
     entityTypes: SearchResultEntityType[]
   ): Promise<SearchResultEntity[]> {
     const response: BffResponse<SearchResultEntity[]> =
-      await BffAxiosClient.get(`${BffEndpoints.Search}/${searchTerm}`, {
+      await BffAxiosClient.get(BffEndpoints.Search, {
         params: {
+          query: searchTerm,
           entityTypes: entityTypes,
         },
       });
