@@ -6,7 +6,7 @@ interface TopQueriesProps {
 
 function TopQueries({ queries }: TopQueriesProps) {
   return (
-    <div className="flex flex-col gap-xs">
+    <div className="group flex flex-col gap-xs">
       {queries.map((query, index) => {
         const barWidth = `${query.percentage}%`;
 
@@ -33,7 +33,7 @@ function TopQueries({ queries }: TopQueriesProps) {
         return (
           <div
             key={query.query}
-            className={`${bgClassName} relative w-full h-8 rounded-full flex items-center overflow-hidden border border-neutral-300`}
+            className={`${bgClassName} group-hover:opacity-50 transition-opacity hover:opacity-100 relative w-full h-8 rounded-full flex items-center overflow-hidden border border-neutral-300`}
           >
             <div
               className={`${fgClassName} z-10 rounded-full absolute inset-y-0 left-0`}

@@ -92,10 +92,16 @@ function StatisticsPage() {
             </h2>
           </div>
           {data.popularTime && (
-            <Info
-              value={data.popularTime.hour}
-              badgeClassName="bg-neutral-400"
-            />
+            <div className="flex flex-col gap-xs">
+              <Info
+                value={data.popularTime.hour}
+                badgeClassName="bg-neutral-400"
+              />
+              <Info
+                value={`${data.popularTime.requestCount} requests`}
+                badgeClassName="bg-neutral-400"
+              />
+            </div>
           )}
         </div>
       </div>

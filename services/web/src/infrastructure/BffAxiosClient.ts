@@ -6,10 +6,10 @@ export const BffAxiosClient = axios.create({
 });
 
 export const BffEndpoints = {
-  Films: "/films",
-  People: "/people",
-  Search: "/search",
-  Statistics: "/statistics",
+  Films: "api/starwars/films",
+  People: "api/starwars/people",
+  Search: "api/starwars/search",
+  Statistics: "api/statistics",
 };
 
 export type BffResponse<T> = AxiosResponse<{ message: string; result: T }>;
