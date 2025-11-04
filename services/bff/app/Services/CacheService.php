@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class CacheService
 {
-    /**
-     * Cache entry structure
-     */
     private function getCacheKey(string $key): string
     {
         return "bff:cache:$key";

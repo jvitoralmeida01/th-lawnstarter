@@ -21,12 +21,20 @@ class SearchController extends Controller
 
     public function search(Request $request): JsonResponse
     {
-        $query = $request->query('query', '');
-        $entityTypes = $request->query('entityTypes', []);
-
-        if (is_string($entityTypes)) {
-            $entityTypes = explode(',', $entityTypes);
+        if (empty($request->query('query'))) {
+            return response()->json([
+                'message' => 'Query is required',
+            ], 400);
         }
+
+        if (empty($request->query('entityTypes'))) {
+            return response()->json([
+                'message' => 'Entity types are required',
+            ], 400);
+        }
+
+        $query = $request->query('query');
+        $entityTypes = $request->query('entityTypes');
 
         $starwarsBase = config('services.starwars.base_url');
         $params = http_build_query([
@@ -45,7 +53,6 @@ class SearchController extends Controller
             'result' => $transformed,
         ]);
 
-        // Set cache headers
         foreach ($result['headers'] as $name => $value) {
             $response->header($name, $value);
         }
