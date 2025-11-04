@@ -5,11 +5,11 @@ import type { TopQueryEntity } from "../../../../domain/entities/StatisticsEntit
 
 describe("TopQueries", () => {
   const mockQueries: TopQueryEntity[] = [
-    { query: "Luke Skywalker", percentage: 45.5 },
-    { query: "Darth Vader", percentage: 30.2 },
-    { query: "A New Hope", percentage: 15.3 },
-    { query: "The Empire Strikes Back", percentage: 6.0 },
-    { query: "Return of the Jedi", percentage: 3.0 },
+    { query: "Luke Skywalker", percentage: "45.5" },
+    { query: "Darth Vader", percentage: "30.2" },
+    { query: "A New Hope", percentage: "15.3" },
+    { query: "The Empire Strikes Back", percentage: "6" },
+    { query: "Return of the Jedi", percentage: "3" },
   ];
 
   it("should render the correct number of queries", () => {

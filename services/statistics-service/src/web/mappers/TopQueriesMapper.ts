@@ -15,7 +15,7 @@ export class TopQueriesMapper {
     }
 
     return {
-      message: "Top queries retrieved successfully",
+      message: "OK",
       result: topQueries,
     };
   }

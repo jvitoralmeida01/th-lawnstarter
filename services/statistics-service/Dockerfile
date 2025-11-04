@@ -22,6 +22,10 @@ RUN npm run build
 # Remove dev dependencies to reduce image size
 RUN npm prune --production
 
+# Make scripts executable
+RUN chmod +x scripts/migrate.sh scripts/wait-for-db.sh
+
 EXPOSE 8082
 
-CMD ["node", "dist/index.js"]
+# Run migrations before starting the application
+CMD sh -c "sh scripts/migrate.sh && node dist/index.js"

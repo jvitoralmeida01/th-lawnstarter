@@ -1,15 +1,15 @@
 export interface TopQueryEntity {
   query: string;
-  percentage: number;
+  percentage: string;
 }
 
 export interface AverageRequestTimeEntity {
-  averageTimeMs: number;
+  averageTimeMs: string;
 }
 
 export interface PopularTimeEntity {
   hour: string;
-  requestCount: number;
+  requestCount: string;
 }
 
 export interface StatisticsEntity {

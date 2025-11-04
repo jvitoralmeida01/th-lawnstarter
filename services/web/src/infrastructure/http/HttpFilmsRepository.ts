@@ -4,15 +4,14 @@ import type { FilmDetailsEntity } from "../../domain/entities/FilmEntity";
 import {
   BffAxiosClient,
   BffEndpoints,
-  type BffResponse,
+  type GenericResponse,
 } from "../BffAxiosClient";
 
 @injectable()
 export class HttpFilmsRepository implements FilmsRepository {
   async getById(id: string): Promise<FilmDetailsEntity> {
-    const response: BffResponse<FilmDetailsEntity> = await BffAxiosClient.get(
-      `${BffEndpoints.Films}/${id}`
-    );
+    const response: GenericResponse<FilmDetailsEntity> =
+      await BffAxiosClient.get(`${BffEndpoints.Films}/${id}`);
 
     if (response.status !== 200) {
       throw new Error(response.data.message || "Failed to fetch film details");

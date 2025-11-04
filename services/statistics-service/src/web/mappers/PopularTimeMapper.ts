@@ -18,7 +18,7 @@ export class PopularTimeMapper {
     }
 
     return {
-      message: "Popular time retrieved successfully",
+      message: "OK",
       result: popularTime,
     };
   }

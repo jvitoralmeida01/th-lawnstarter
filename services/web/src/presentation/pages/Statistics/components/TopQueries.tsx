@@ -1,10 +1,22 @@
 import type { TopQueryEntity } from "../../../../domain/entities/StatisticsEntity";
+import { CiWarning } from "react-icons/ci";
 
 interface TopQueriesProps {
   queries: TopQueryEntity[];
 }
 
 function TopQueries({ queries }: TopQueriesProps) {
+  if (queries.length === 0) {
+    return (
+      <div className="flex items-center gap-xs">
+        <CiWarning className="text-warn" />
+        // @TODO: Add message from backend (will have to propagate from the
+        repository
+        <div className="text-content text-neutral-500">No queries found</div>
+      </div>
+    );
+  }
+
   return (
     <div className="group flex flex-col gap-xs">
       {queries.map((query, index) => {

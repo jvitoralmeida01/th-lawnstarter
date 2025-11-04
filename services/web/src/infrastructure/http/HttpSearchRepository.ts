@@ -7,7 +7,7 @@ import type {
 import {
   BffAxiosClient,
   BffEndpoints,
-  type BffResponse,
+  type GenericResponse,
 } from "../BffAxiosClient";
 
 @injectable()
@@ -16,7 +16,7 @@ export class HttpSearchRepository implements SearchRepository {
     searchTerm: string,
     entityTypes: SearchResultEntityType[]
   ): Promise<SearchResultEntity[]> {
-    const response: BffResponse<SearchResultEntity[]> =
+    const response: GenericResponse<SearchResultEntity[]> =
       await BffAxiosClient.get(BffEndpoints.Search, {
         params: {
           query: searchTerm,

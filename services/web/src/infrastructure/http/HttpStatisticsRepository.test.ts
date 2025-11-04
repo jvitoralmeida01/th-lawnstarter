@@ -26,27 +26,39 @@ describe("HttpStatisticsRepository", () => {
       topQueries: [
         {
           query: "luke",
-          percentage: 45.5,
+          percentage: "45.5",
         },
         {
           query: "darth",
-          percentage: 30.2,
+          percentage: "30.2",
         },
       ],
       averageRequestTime: {
-        averageTimeMs: 123.45,
+        averageTimeMs: "123.45",
       },
       popularTime: {
         hour: "14",
-        requestCount: 150,
+        requestCount: "150",
       },
     };
 
     const mockResponse = {
       status: 200,
       data: {
-        message: "Success",
-        result: mockStatistics,
+        result: {
+          topQueries: {
+            message: "Success",
+            result: mockStatistics.topQueries,
+          },
+          averageRequestTime: {
+            message: "Success",
+            result: mockStatistics.averageRequestTime,
+          },
+          popularTime: {
+            message: "Success",
+            result: mockStatistics.popularTime,
+          },
+        },
       },
     };
 

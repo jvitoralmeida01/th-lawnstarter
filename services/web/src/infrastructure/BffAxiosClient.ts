@@ -12,6 +12,6 @@ export const BffEndpoints = {
   Statistics: "/api/statistics",
 };
 
-export type BffResponse<T> = AxiosResponse<{ message: string; result: T }>;
+export type GenericResponse<T> = AxiosResponse<{ message: string; result: T }>;
 
 export type BffEndpoint = (typeof BffEndpoints)[keyof typeof BffEndpoints];
