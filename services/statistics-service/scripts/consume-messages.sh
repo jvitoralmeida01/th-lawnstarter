@@ -1,4 +1,5 @@
 #!/bin/bash
+# This script is purely for testing purposes !!
 # Consume messages from RabbitMQ by running the script inside the Docker container
 
 cd "$(dirname "$0")/.." || exit 1

@@ -1,9 +1,9 @@
 import * as amqp from "amqplib";
-import { config } from "./config.js";
-import { database } from "./database.js";
-import type { QueryEvent } from "./types.js";
+import { config } from "../../config.js";
+import type { EventBrokerRepository } from "../../application/ports/EventBrokerRepository.js";
+import type { QueryEvent } from "../../domain/entities/queryEvent.js";
 
-class RabbitMQConsumer {
+export class RabbitMQEventBrokerRepository implements EventBrokerRepository {
   private connection: amqp.ChannelModel | null = null;
   private channel: amqp.Channel | null = null;
 
@@ -37,7 +37,9 @@ class RabbitMQConsumer {
     return this.connection !== null && this.channel !== null;
   }
 
-  async consumeMessages(): Promise<void> {
+  async consumeQueryEvents(
+    onEventsBatch: (events: QueryEvent[]) => Promise<void>
+  ): Promise<void> {
     if (!this.channel) {
       throw new Error("Channel not initialized. Call connect() first.");
     }
@@ -48,7 +50,6 @@ class RabbitMQConsumer {
 
     return new Promise(async (resolve, reject) => {
       const cleanup = async () => {
-        // Cancel the consumer if it's still active
         if (consumerTag && this.channel) {
           try {
             await this.channel.cancel(consumerTag);
@@ -63,10 +64,10 @@ class RabbitMQConsumer {
         if (events.length > 0) {
           console.log(`Processing ${events.length} query events`);
           try {
-            await database.insertQueryEventsBatch(events);
-            console.log(`Successfully inserted ${events.length} events`);
+            await onEventsBatch(events);
+            console.log(`Successfully processed ${events.length} events`);
           } catch (error) {
-            console.error("Error inserting events:", error);
+            console.error("Error processing events:", error);
             reject(error);
             return;
           }
@@ -79,7 +80,6 @@ class RabbitMQConsumer {
       const timeoutId = setTimeout(finish, timeout);
 
       try {
-        // Register consumer and store the consumer tag
         if (!this.channel) {
           clearTimeout(timeoutId);
           reject(new Error("Channel was closed during consume setup"));
@@ -92,7 +92,6 @@ class RabbitMQConsumer {
               try {
                 const content = JSON.parse(msg.content.toString());
 
-                // Validate message structure
                 if (
                   content.path &&
                   content.route &&
@@ -112,14 +111,13 @@ class RabbitMQConsumer {
                 this.channel!.ack(msg);
               } catch (error) {
                 console.error("Error processing message:", error);
-                this.channel!.nack(msg, false, false); // Reject and don't requeue
+                this.channel!.nack(msg, false, false);
               }
             }
           },
           { noAck: false }
         );
 
-        // Store the consumer tag for cleanup
         consumerTag = consumeResult.consumerTag;
       } catch (error) {
         clearTimeout(timeoutId);
@@ -148,5 +146,3 @@ class RabbitMQConsumer {
     }
   }
 }
-
-export const rabbitMQConsumer = new RabbitMQConsumer();

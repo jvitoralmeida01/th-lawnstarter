@@ -1,31 +1,32 @@
-import { database } from "../src/database.js";
-import { startStatisticsUpdate } from "../src/index.js";
+// This script is purely for testing purposes !!
 
-async function main(): Promise<void> {
+import { useUpdateStatistics } from "../src/infrastructure/di/index.js";
+import { useStatsSnapshotRepository } from "../src/infrastructure/di/index.js";
+import { HttpStatsSnapshotRepository } from "../src/infrastructure/http/HttpStatsSnapshotRepository.js";
+
+async function consumeMessages(): Promise<void> {
   try {
-    console.log("Initializing database connection...");
-    await database.initialize();
+    const statsSnapshotRepository = useStatsSnapshotRepository();
 
-    console.log(
-      "Starting statistics update (consuming RabbitMQ messages)...\n"
-    );
-    await startStatisticsUpdate();
-
-    console.log("\nStatistics update completed successfully");
-    await database.close();
-    process.exit(0);
-  } catch (error) {
-    console.error("Error during statistics update:", error);
-    try {
-      await database.close();
-    } catch (closeError) {
-      // Ignore close errors
+    if (statsSnapshotRepository instanceof HttpStatsSnapshotRepository) {
+      await statsSnapshotRepository.initialize();
     }
-    process.exit(1);
+
+    const updateStatistics = useUpdateStatistics();
+    await updateStatistics.execute();
+
+    console.log("Successfully consumed messages and updated statistics");
+  } catch (error) {
+    console.error("Error consuming messages:", error);
+    throw error;
   }
 }
 
-main().catch((error) => {
-  console.error("Unhandled error:", error);
-  process.exit(1);
-});
+consumeMessages()
+  .then(() => {
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error("Failed to consume messages:", error);
+    process.exit(1);
+  });

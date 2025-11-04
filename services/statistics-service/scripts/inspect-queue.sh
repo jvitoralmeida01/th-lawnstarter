@@ -1,5 +1,5 @@
 #!/bin/bash
-# Inspect RabbitMQ queues and consumers using rabbitmqadmin CLI tool
+# This script is purely for testing purposes !!
 
 echo "=== Queue Information ==="
 docker-compose exec rabbitmq rabbitmqadmin list queues name messages consumers
