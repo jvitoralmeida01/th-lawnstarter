@@ -43,8 +43,6 @@ function StatisticsPage() {
     );
   }
 
-  console.log(data);
-
   return (
     <Surface
       className="container max-w-4xl max-h-xl md:max-h-lg mx-auto flex flex-col relative"
@@ -66,7 +64,7 @@ function StatisticsPage() {
               Top 5 queries
             </h2>
           </div>
-          <TopQueries queries={data.topQueries.slice(0, 5)} />
+          <TopQueries queries={data.topQueries?.slice(0, 5) ?? []} />
         </div>
 
         <div className="mb-l">
@@ -76,33 +74,26 @@ function StatisticsPage() {
               Average length of request timing
             </h2>
           </div>
-          {data.averageRequestTime && (
-            <Info
-              value={`${data.averageRequestTime.averageTimeMs} ms`}
-              badgeClassName="bg-neutral-400"
-            />
-          )}
+          <Info
+            value={data.averageRequestTime?.averageTimeMs}
+            badgeClassName="bg-neutral-400"
+          />
         </div>
 
         <div className="mb-l">
           <div className="flex items-center w-full gap-xs mb-xs pb-s border-b border-neutral-300">
             <FaRegClock className="text-neutral-500" />
             <h2 className="text-subtitle text-typography-400 font-bold">
-              Most popular hour of day for overall search volume
+              Most popular hour of day for overall request volume
             </h2>
           </div>
-          {data.popularTime && (
-            <div className="flex flex-col gap-xs">
-              <Info
-                value={data.popularTime.hour}
-                badgeClassName="bg-neutral-400"
-              />
-              <Info
-                value={`${data.popularTime.requestCount} requests`}
-                badgeClassName="bg-neutral-400"
-              />
-            </div>
-          )}
+          <div className="flex flex-col gap-xs">
+            <Info
+              value={data.popularTime?.hour}
+              detail={`${data.popularTime?.requestCount} requests`}
+              badgeClassName="bg-neutral-400"
+            />
+          </div>
         </div>
       </div>
     </Surface>

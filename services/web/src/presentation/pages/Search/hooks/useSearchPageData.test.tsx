@@ -79,12 +79,12 @@ describe("useSearchPageData", () => {
       {
         id: "1",
         name: "Luke Skywalker",
-        type: SearchResultEntityType.People,
+        entityType: SearchResultEntityType.People,
       },
       {
         id: "2",
         name: "A New Hope",
-        type: SearchResultEntityType.Films,
+        entityType: SearchResultEntityType.Films,
       },
     ];
 

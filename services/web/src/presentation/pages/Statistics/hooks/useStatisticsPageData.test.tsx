@@ -54,15 +54,15 @@ describe("useStatisticsPageData", () => {
 
   it("should update states correctly on useCase success", async () => {
     const mockTopQueries: TopQueryEntity[] = [
-      { query: "luke", percentage: 50 },
-      { query: "vader", percentage: 30 },
+      { query: "luke", percentage: "50" },
+      { query: "vader", percentage: "30" },
     ];
     const mockAverageRequestTime: AverageRequestTimeEntity = {
-      averageTimeMs: 150,
+      averageTimeMs: "150",
     };
     const mockPopularTime: PopularTimeEntity = {
       hour: "14",
-      requestCount: 100,
+      requestCount: "100",
     };
 
     const mockStatistics = {

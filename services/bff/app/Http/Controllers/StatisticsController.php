@@ -6,6 +6,7 @@ use App\Services\CacheService;
 use App\Services\ResponseTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class StatisticsController extends Controller
 {
@@ -29,27 +30,31 @@ class StatisticsController extends Controller
         $averageRequestTimeSuffix = 'average-request-time';
         $popularTimeSuffix = 'popular-time';
 
+        $topQueriesUrl = $upstreamUrl . $topQueriesSuffix;
+        $averageRequestTimeUrl = $upstreamUrl . $averageRequestTimeSuffix;
+        $popularTimeUrl = $upstreamUrl . $popularTimeSuffix;
+
         $topQueriesResult = null;
         $averageRequestTimeResult = null;
         $popularTimeResult = null;
         $successCount = 0;
 
         try {
-            $topQueriesResult = $this->cacheService->cachedGet($cacheKeyPrefix.$topQueriesSuffix, $upstreamUrl.$topQueriesSuffix, self::POLICY);
+            $topQueriesResult = $this->cacheService->cachedGet($cacheKeyPrefix.$topQueriesSuffix, $topQueriesUrl, self::POLICY);
             $successCount++;
         } catch (\Exception $e) {
             $topQueriesResult = null;
         }
 
         try {
-            $averageRequestTimeResult = $this->cacheService->cachedGet($cacheKeyPrefix.$averageRequestTimeSuffix, $upstreamUrl.$averageRequestTimeSuffix, self::POLICY);
+            $averageRequestTimeResult = $this->cacheService->cachedGet($cacheKeyPrefix.$averageRequestTimeSuffix, $averageRequestTimeUrl, self::POLICY);
             $successCount++;
         } catch (\Exception $e) {
             $averageRequestTimeResult = null;
         }
 
         try {
-            $popularTimeResult = $this->cacheService->cachedGet($cacheKeyPrefix.$popularTimeSuffix, $upstreamUrl.$popularTimeSuffix, self::POLICY);
+            $popularTimeResult = $this->cacheService->cachedGet($cacheKeyPrefix.$popularTimeSuffix, $popularTimeUrl, self::POLICY);
             $successCount++;
         } catch (\Exception $e) {
             $popularTimeResult = null;

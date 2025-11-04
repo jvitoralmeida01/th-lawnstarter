@@ -4,15 +4,14 @@ import type { PersonDetailsEntity } from "../../domain/entities/PersonEntity";
 import {
   BffAxiosClient,
   BffEndpoints,
-  type BffResponse,
+  type GenericResponse,
 } from "../BffAxiosClient";
 
 @injectable()
 export class HttpPeopleRepository implements PeopleRepository {
   async getById(id: string): Promise<PersonDetailsEntity> {
-    const response: BffResponse<PersonDetailsEntity> = await BffAxiosClient.get(
-      `${BffEndpoints.People}/${id}`
-    );
+    const response: GenericResponse<PersonDetailsEntity> =
+      await BffAxiosClient.get(`${BffEndpoints.People}/${id}`);
 
     if (response.status !== 200) {
       throw new Error(

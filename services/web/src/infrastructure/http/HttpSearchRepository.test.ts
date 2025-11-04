@@ -51,17 +51,15 @@ describe("HttpSearchRepository", () => {
       SearchResultEntityType.Films,
     ]);
 
-    expect(BffAxiosClient.get).toHaveBeenCalledWith(
-      `${BffEndpoints.Search}/luke`,
-      {
-        params: {
-          entityTypes: [
-            SearchResultEntityType.People,
-            SearchResultEntityType.Films,
-          ],
-        },
-      }
-    );
+    expect(BffAxiosClient.get).toHaveBeenCalledWith(BffEndpoints.Search, {
+      params: {
+        query: "luke",
+        entityTypes: [
+          SearchResultEntityType.People,
+          SearchResultEntityType.Films,
+        ],
+      },
+    });
     expect(result).toEqual(mockSearchResults);
   });
 
@@ -80,14 +78,12 @@ describe("HttpSearchRepository", () => {
     await expect(
       repository.getMany("test", [SearchResultEntityType.People])
     ).rejects.toThrow("Internal server error");
-    expect(BffAxiosClient.get).toHaveBeenCalledWith(
-      `${BffEndpoints.Search}/test`,
-      {
-        params: {
-          entityTypes: [SearchResultEntityType.People],
-        },
-      }
-    );
+    expect(BffAxiosClient.get).toHaveBeenCalledWith(BffEndpoints.Search, {
+      params: {
+        query: "test",
+        entityTypes: [SearchResultEntityType.People],
+      },
+    });
   });
 
   it("should throw a default error message when response status is not 200 and no message is provided", async () => {

@@ -19,7 +19,7 @@ export class AverageRequestTimeMapper {
     }
 
     return {
-      message: "Average request time retrieved successfully",
+      message: "OK",
       result: averageRequestTime,
     };
   }

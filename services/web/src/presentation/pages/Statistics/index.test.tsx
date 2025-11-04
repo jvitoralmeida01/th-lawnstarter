@@ -23,20 +23,20 @@ vi.mock("react-router-dom", async () => {
 
 describe("StatisticsPage", () => {
   const mockTopQueries: TopQueryEntity[] = [
-    { query: "Luke Skywalker", percentage: 45.5 },
-    { query: "Darth Vader", percentage: 30.2 },
-    { query: "A New Hope", percentage: 15.3 },
-    { query: "The Empire Strikes Back", percentage: 6.0 },
-    { query: "Return of the Jedi", percentage: 3.0 },
+    { query: "Luke Skywalker", percentage: "45.5" },
+    { query: "Darth Vader", percentage: "30.2" },
+    { query: "A New Hope", percentage: "15.3" },
+    { query: "The Empire Strikes Back", percentage: "6.0" },
+    { query: "Return of the Jedi", percentage: "3.0" },
   ];
 
   const mockAverageRequestTime: AverageRequestTimeEntity = {
-    averageTimeMs: 250,
+    averageTimeMs: "250 ms",
   };
 
   const mockPopularTime: PopularTimeEntity = {
     hour: "14:00",
-    requestCount: 150,
+    requestCount: "150",
   };
 
   beforeEach(() => {
@@ -68,7 +68,7 @@ describe("StatisticsPage", () => {
       ).toBeInTheDocument();
       expect(screen.getByText("250 ms")).toBeInTheDocument();
       expect(
-        screen.getByText(/Most popular hour of day for overall search volume/i)
+        screen.getByText(/Most popular hour of day for overall request volume/i)
       ).toBeInTheDocument();
       expect(screen.getByText("14:00")).toBeInTheDocument();
     });
