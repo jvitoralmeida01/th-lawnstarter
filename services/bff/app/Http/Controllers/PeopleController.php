@@ -21,6 +21,12 @@ class PeopleController extends Controller
 
     public function show(Request $request, string $id): JsonResponse
     {
+        if (empty($id)) {
+            return response()->json([
+                'message' => 'Person ID is required',
+            ], 400);
+        }
+
         $starwarsBase = config('services.starwars.base_url');
         $upstreamUrl = "{$starwarsBase}/people/{$id}";
         $cacheKey = "people:{$id}";
@@ -34,7 +40,6 @@ class PeopleController extends Controller
             'result' => $transformed,
         ]);
 
-        // Set cache headers
         foreach ($result['headers'] as $name => $value) {
             $response->header($name, $value);
         }
