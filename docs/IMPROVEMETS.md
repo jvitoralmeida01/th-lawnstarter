@@ -4,3 +4,4 @@
 - make statistics page dynamic to accept other statistics
 - Separate the statistics endpoints in the BFF so the frontend can load them in parallel
 - Improve error messages and api feedback
+- daily partition the db for big volumes
