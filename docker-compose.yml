@@ -55,8 +55,6 @@ services:
       - redis
     networks:
       - sw-net
-    volumes:
-      - ./services/starwars-service:/app
 
   statistics:
     build:
@@ -70,8 +68,6 @@ services:
       - rabbitmq
     networks:
       - sw-net
-    volumes:
-      - ./services/statistics-service:/app
 
   rabbitmq:
     image: rabbitmq:3-management
