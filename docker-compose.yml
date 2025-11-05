@@ -40,8 +40,6 @@ services:
       - redis
     networks:
       - sw-net
-    volumes:
-      - ./services/bff:/app
 
   starwars:
     build:
