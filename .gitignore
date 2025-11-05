@@ -1,8 +1,5 @@
 .DS_Store
 
-*.env
-!*.example.env
-
 /vendor/
 **/node_modules/
 npm-debug.log
