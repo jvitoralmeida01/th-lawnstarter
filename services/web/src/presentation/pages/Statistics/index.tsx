@@ -76,7 +76,7 @@ function StatisticsPage() {
           </div>
           <Info
             value={data.averageRequestTime?.averageTimeMs}
-            noData={data.averageRequestTime?.averageTimeMs.includes("0")}
+            noData={data.averageRequestTime?.averageTimeMs == "≈ 0 ms"}
             badgeClassName="bg-neutral-400"
           />
         </div>
