@@ -1,0 +1,106 @@
+// Should be developed in Node (with Typescript)
+// The Starwars service will essentially act as a brigde from my bff service to the public SWAPI api
+
+routes: {
+  route: /films/:id
+  -> get("https://www.swapi.tech/api/films/:id", response_format: {
+    "message": string;
+    "result": {
+      "uuid": number;
+      "properties": {
+        "title": "A New Hope";
+        "opening_crawl": string;
+        "characters": string<url>[]; // array of urls (the id of the character lives at the end of the url e.g. ".../people/2", id=2 )
+      }
+    }
+  })
+  -> getEach("characters") // fetch each character using the same repository used in '/people/:id' but use only id and name
+  -> rabbitMQ.produceEvent({
+      path: string; // The entire real path except the base url Ex: "/search?query=luke" or "/people/2"
+      route: string; // Remove url parameters as well Ex: "/search" or "/people/2"
+      ms: number; // ellapsedTime from receiving the request to responding
+      source?: string; // always "starwars"
+      occurred_at?: string; // timestamp.now()
+  })
+  -> transform_to_and_respond({
+      id: string,
+      name: string,
+      openingCrawl: string,
+      characters: {
+        id: string,
+        name: string,
+      }[]
+  })
+
+  route: /people/:id
+  -> get("https://www.swapi.tech/api/people/:id", response_format: {
+    "message": string;
+    "result": {
+      "uuid": number;
+      "properties": {
+        "name": string,
+        "birth_year": string,
+        "eye_color": string,
+        "gender": string,
+        "hair_color": string,
+        "height": string,
+        "mass": string,
+        "skin_color": string,
+        "films": string<url>[]; // array of urls (the id of the film lives at the end of the url e.g. ".../films/2", id=2 )
+      }
+    }
+  })
+  -> getEach("films") // fetch each film using the same repository used in '/film/:id' but use only id and name
+  -> rabbitMQ.produceEvent({
+      path: string; // The entire real path except the base url Ex: "/search?query=luke" or "/people/2"
+      route: string; // Remove url parameters as well Ex: "/search" or "/people/2"
+      ms: number; // ellapsedTime from receiving the request to responding
+      source?: string; // always "starwars"
+      occurred_at?: string; // timestamp.now()
+  })
+  -> transform_to_and_respond({
+      id: string,
+      name: string,
+      birthYear: string,
+      eyeColor: string,
+      gender: string,
+      hairColor: string,
+      height: string,
+      mass: string,
+      skinColor: string,
+      films: {
+        id: string,
+        name: string,
+      }[]
+  })
+
+  route: /search?query=string&entityTypes=["people"|"films"]
+  -> if($entityTypes.has("people")) get("https://www.swapi.tech/api/people/?name=$query", response_format: {
+    "message": string;
+    "result": SAME_AS_PEOPLE_ROUTE[]
+  })
+  -> if($entityTypes.has("films")) get("https://www.swapi.tech/api/films/?name=$query", response_format: {
+    "message": string;
+    "result": SAME_AS_FILM_ROUTE[]
+  })
+  -> merge(people, films).sortAlphabetically()
+  -> rabbitMQ.produceEvent({
+      path: string; // The entire real path except the base url Ex: "/search?query=luke" or "/people/2"
+      route: string; // Remove url parameters as well Ex: "/search" or "/people/2"
+      ms: number; // ellapsedTime from receiving the request to responding
+      source?: string; // always "starwars"
+      occurred_at?: string; // timestamp.now()
+  })
+  -> transform_to_and_respond({
+    message: string,
+    result: {
+      id: string;
+      name: string;
+      entityType: "people" | "film"
+    }
+  })
+
+  cache: redisOnAllRoutes(age: 1 day) // The data from the SWAPI is very stable, rarely changes, and there's a daily request limit, so that's the reason
+
+  messaging: rabbitMQ()
+}
