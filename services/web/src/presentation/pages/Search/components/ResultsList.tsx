@@ -13,9 +13,11 @@ function ResultsList({ results }: ResultsListProps) {
   const navigate = useNavigate();
 
   const handleSeeDetails = (result: SearchResultEntity) => {
+    console.log(JSON.stringify(result, null, 2));
     if (result.entityType === SearchResultEntityType.People) {
       navigate(`/people/${result.id}`);
     } else if (result.entityType === SearchResultEntityType.Films) {
+      console.log(`/film/${result.id}`);
       navigate(`/film/${result.id}`);
     }
   };
