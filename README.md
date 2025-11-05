@@ -5,6 +5,7 @@ A microservices-based application that provides a user interface for querying St
 ## Architecture Overview
 
 ### README/ folder
+
 Do read `README/DEVELOPMENT_NOTES.md` and take a look at `README/System Design.png` (or open `README/System Design.excalidraw` in the excalidraw website: https://excalidraw.com/)
 
 The system consists of four main services working together:
