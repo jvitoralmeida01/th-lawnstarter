@@ -28,7 +28,7 @@ class PeopleController extends Controller
         }
 
         $starwarsBase = config('services.starwars.base_url');
-        $upstreamUrl = "{$starwarsBase}/people/{$id}";
+        $upstreamUrl = "{$starwarsBase}/api/people/{$id}";
         $cacheKey = "people:{$id}";
 
         $result = $this->cacheService->cachedGet($cacheKey, $upstreamUrl, self::POLICY);

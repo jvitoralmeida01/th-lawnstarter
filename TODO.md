@@ -80,3 +80,17 @@
 
 - [ ] Update README.md and (TODO.md "this")
 - [ ] Add IMPROVEMENTS.md
+
+
+
+
+// @TODO:
+- Propagate feedback messages from backend
+- Everything is happening at the Controller level inside the bff, fix that
+- Add clear documentation all around and clean the repo
+- Add more unit tests to StatisticsService
+- Add unit tests to the StarwarsService
+- Add unit tests to the BFF
+- Add at least 4 E2E tests (one for each thing, film, people, search and statistics)
+- Add feedback illustrations to the frontend
+- Add animation to list in the frontend

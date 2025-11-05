@@ -8,7 +8,7 @@ class ResponseTransformer
     {
         return [
           'id' => $film['id'],
-          'name' => $film['title'],
+          'name' => $film['name'],
           'openingCrawl' => $film['openingCrawl'],
           'characters' => $film['characters'],
         ];
