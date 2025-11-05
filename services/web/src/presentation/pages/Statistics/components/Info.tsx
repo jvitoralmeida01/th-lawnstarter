@@ -4,10 +4,16 @@ interface InfoProps {
   value?: string;
   badgeClassName?: string;
   detail?: string;
+  noData?: boolean;
 }
 
-function Info({ value, badgeClassName = "bg-neutral-400", detail }: InfoProps) {
-  if (!value) {
+function Info({
+  value,
+  badgeClassName = "bg-neutral-400",
+  detail,
+  noData = false,
+}: InfoProps) {
+  if (noData) {
     return (
       <div className="flex items-center gap-xs">
         <CiWarning className="text-warn" />

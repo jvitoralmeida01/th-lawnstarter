@@ -76,6 +76,7 @@ function StatisticsPage() {
           </div>
           <Info
             value={data.averageRequestTime?.averageTimeMs}
+            noData={data.averageRequestTime?.averageTimeMs.includes("0")}
             badgeClassName="bg-neutral-400"
           />
         </div>
@@ -90,6 +91,7 @@ function StatisticsPage() {
           <div className="flex flex-col gap-xs">
             <Info
               value={data.popularTime?.hour}
+              noData={data.popularTime?.requestCount == "0"}
               detail={`${data.popularTime?.requestCount} requests`}
               badgeClassName="bg-neutral-400"
             />

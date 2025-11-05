@@ -152,7 +152,7 @@ A Node.js/TypeScript service that:
 
 - Asynchronous event processing via cron (configurable interval)
 - PostgreSQL for persistent storage
-- Statistics aggregation over configurable time windows (default: all time)
+- Statistics aggregation over configurable time windows, default: all time (STATS_WINDOW_HOURS = 0)
 - Clean architecture pattern
 
 ## Infrastructure
