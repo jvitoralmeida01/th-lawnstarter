@@ -1,8 +1,0 @@
-- Split redis into two containers
-- Copy all the data from the API daily, to get around the 10.000 daily rate limit
-- Fix the delay in the icons when changing theme
-- make statistics page dynamic to accept other statistics
-- Separate the statistics endpoints in the BFF so the frontend can load them in parallel
-- Improve error messages and endpoints statuses
-- daily partition the db for big volumes
-- make the interval of the cronJob more dynamic, allowing for different time ranges not only minutes
