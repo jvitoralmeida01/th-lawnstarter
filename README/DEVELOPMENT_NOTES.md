@@ -42,6 +42,8 @@
 
 - **Theme Persistence**: Move theme logic into a Provider and/or save theme in localStorage to maintain theme on reload
 
+- **Statistics Empty State**: Delegate the empty state decision to the BFF by using a flag or different HTTP status code to signal an empty state, instead of relying on string equality checks in the frontend
+
 ### Backend & API Improvements
 
 - **BFF Endpoints**: Separate the statistics endpoints in the BFF so the frontend can load them in parallel and(or) perform lazy-loading
