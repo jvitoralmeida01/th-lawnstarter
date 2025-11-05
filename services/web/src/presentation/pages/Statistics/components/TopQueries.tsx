@@ -10,8 +10,6 @@ function TopQueries({ queries }: TopQueriesProps) {
     return (
       <div className="flex items-center gap-xs">
         <CiWarning className="text-warn" />
-        // @TODO: Add message from backend (will have to propagate from the
-        repository
         <div className="text-content text-neutral-500">No queries found</div>
       </div>
     );
