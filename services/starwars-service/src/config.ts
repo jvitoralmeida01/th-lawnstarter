@@ -9,8 +9,8 @@ export const config = {
     host: process.env.REDIS_HOST || "redis",
     port: parseInt(process.env.REDIS_PORT || "6379", 10),
     password: process.env.REDIS_PASSWORD || undefined,
-    db: parseInt(process.env.REDIS_CACHE_DB || "2", 10), // DB 2 for starwars service
-    ttl: 24 * 60 * 60, // 1 day in seconds
+    db: parseInt(process.env.REDIS_CACHE_DB || "2", 10),
+    ttl: 24 * 60 * 60,
   },
 
   rabbitmq: {
