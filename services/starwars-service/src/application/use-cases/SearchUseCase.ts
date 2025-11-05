@@ -89,7 +89,7 @@ export class SearchUseCase {
             results.push({
               id,
               name: film.properties.title,
-              entityType: "film",
+              entityType: "films",
               relevanceScore: this.calculateRelevanceScore(
                 film.properties.title,
                 query

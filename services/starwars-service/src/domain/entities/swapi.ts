@@ -74,5 +74,5 @@ export interface Person {
 export interface SearchResult {
   id: string;
   name: string;
-  entityType: "people" | "film";
+  entityType: "people" | "films";
 }
