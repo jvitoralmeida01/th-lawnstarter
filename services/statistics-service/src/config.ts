@@ -18,7 +18,7 @@ export const config = {
   },
 
   statistics: {
-    windowHours: parseInt(process.env.STATS_WINDOW_HOURS || "24", 10),
+    windowHours: parseInt(process.env.STATS_WINDOW_HOURS || "0", 10),
     scheduledIntervalMinutes: parseInt(
       process.env.SCHEDULED_INTERVAL_IN_MINUTES || "5",
       10
